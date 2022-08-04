@@ -47,14 +47,18 @@ const [showScore, setShowScore] = useState(false)
 
 const [score, setScore] = useState(0)
 
-const buttonclick = (event) => {
+const buttonclick = (isCorrect) => {
   setCurrentQuestion(currentQuestion+1)
   if(currentQuestion>=questions.length-1) {
     alert("Yayy! you have reached the end of the Quiz!")
     setShowScore(true)
   }
-  if(questions[currentQuestion].answerOptions.isCorrect){
+  if(isCorrect===true){
+    alert("Correct Answer")
     setScore(score+1);
+  }
+  if(isCorrect===false){
+    alert("Wrong Answer")
   }
 }
 
@@ -77,7 +81,7 @@ const buttonclick = (event) => {
 					</div>
 					<div className='answer-section'>
 				{questions[currentQuestion].answerOptions.map((answerOption) => (
-          <button onClick={buttonclick}>{answerOption.answerText}</button>))}
+          <button onClick={()=>buttonclick(answerOption.isCorrect)}>{answerOption.answerText}</button>))}
 					</div>
 				</>
 			)}
